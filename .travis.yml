@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+- stable
+
+install:
+- npm i -g typescript typings
+- npm install
+
+before_script:
+- npm run build
+
+script:
+- npm test
+
+deploy:
+  skip_cleanup: true
+  provider: npm
+
+  email: julien.sarazin@me.com
+  api_key:
+    secure: ePtWGPgvSVqLgDuDuqMP0cZ81aqkCn+8MOmXrMmLY9mUkpgXDHkgQdmwhfTsLfGLeQBqvVw7LsoOgyf2tEMlMN4sYZbz6XYPkVAnMHK4bjWb3L0z2MsYXEK5GUdQLnSBeV9FIczSJxXsUx5J9nl2Y2JIUsdd4iNo5ccb6FR0wFguqhasl+JpbKjlP4ztxnrqMm1aKwgRjHbf+25wtn08PqdMFHUko04x5ZoSGQhmT+zfFRv3LJp3Ie07NsG1JiwSigoUnxxA8Sya8lrfRLkCQClX+PxZXnr1zp2ZOv/dXxSSRa35PRsDqY/JGHzrEbTuhVLxuoeQvufJRTaTa6WRl4rabl163eWfBMwLNSmZKpMX5BW6qPWSeBoot/iVtZcDxqjTkMUh5JrXIKwEaTUjjCq7IPVTNVICHDiUiQzBiiZBTXEQIVua/unLU6D2wuqI0zzVVw7KiyxYTXw/1EAvEFKyQu8ErkV3krIPF+w4GDnPBUl49jVsAWrfh1um4FQr8tbKvwxe0FiGii1P5g6uFg0S3G/KB4Xs+e1iJ6jhdVNc0fvlKdJvXMzhHkgKEnZJ1MeeOHtkxYX29JEqHcij1hnpEWZxb7YgwEmmAvHIyxgT3ZtVGpYP/1Qg5DWbBYsFouKyCv3gz7WKwiCdLHOCKbSMQy+AeIZOeXZZSxKVdB4=
+
+  on:
+    tags: true
+    repo: implicity-healthcare/nest-minio
