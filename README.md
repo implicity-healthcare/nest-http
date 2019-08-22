@@ -9,5 +9,3 @@ npm i --save  @implicity/nest-http
 ```
 
 ## Usage
-
-Test
