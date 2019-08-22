@@ -1,5 +1,5 @@
 {
-    "name": "@implicity/nest-minio",
+    "name": "@implicity/nest-http",
     "version": "0.1.0",
     "description": "description",
     "author": "",
@@ -25,15 +25,14 @@
         "@nestjs/common": "6.5.3",
         "@nestjs/core": "6.5.3",
         "@nestjs/testing": "6.3.2",
-        "axios": "^0.19.0",
-        "minio": "7.0.12",
-        "nestjs-config": "^1.4.3",
+        "@types/node": "^12.7.2",
+        "axios": "0.19.0",
+        "nestjs-config": "1.4.3",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.2"
     },
     "devDependencies": {
         "@types/jest": "24.0.14",
-        "@types/minio": "^7.0.2",
         "coveralls": "3.0.4",
         "jest": "24.8.0",
         "prettier": "1.18.2",

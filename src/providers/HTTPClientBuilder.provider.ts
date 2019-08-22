@@ -7,7 +7,7 @@ import {
     IHTTPRequestConfiguration
 } from '../interfaces';
 import Axios from 'axios';
-import { NestAxiosBridgeErrorHandler } from '../NestAxiosBridgeErrorHandler';
+import { NestAxiosBridgeErrorHandler } from '../utils/NestAxiosBridgeErrorHandler';
 
 export const HTTPClientBuilderProvider = {
     token: NestHTTPClientBuilderToken,

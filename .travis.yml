@@ -22,4 +22,4 @@ deploy:
 
   on:
     tags: true
-    repo: implicity-healthcare/nest-minio
+    repo: implicity-healthcare/nest-http
