@@ -6,7 +6,7 @@ import {
     IHTTPClientInstance,
     IHTTPRequestConfiguration
 } from '../interfaces';
-import Axios from 'axios';
+import Axios, { AxiosRequestConfig } from 'axios';
 import { NestAxiosBridgeErrorHandler } from '../utils/NestAxiosBridgeErrorHandler';
 
 export const HTTPClientBuilderProvider = {
@@ -21,13 +21,9 @@ export const HTTPClientBuilderProvider = {
                 ? configService.get(configuration.target)
                 : {};
 
-            const options = { ...httpConfiguration, ...configuration.request };
+            const options: AxiosRequestConfig = { ...httpConfiguration, ...configuration.request };
 
-            const instance = Axios.create({
-                timeout: options.timeout,
-                baseURL: options.baseURL,
-                paramsSerializer: options.paramsSerializer,
-            });
+            const instance = Axios.create(options);
 
             instance.interceptors.response
                 .use(response => response, NestAxiosBridgeErrorHandler);
