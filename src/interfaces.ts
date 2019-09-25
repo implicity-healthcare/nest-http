@@ -20,4 +20,4 @@ export interface NHCDefaultOptions {
     headers?: Headers;
 }
 
-export type NHCClientBuilder = (options?: NHCConfiguration) => NHCInstance;
+export type NHCBuilder = (options?: NHCConfiguration) => NHCInstance;
