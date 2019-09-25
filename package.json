@@ -1,6 +1,6 @@
 {
     "name": "@implicity/nest-http",
-    "version": "0.1.1",
+    "version": "1.0.0",
     "description": "description",
     "author": "",
     "license": "MIT",
@@ -26,9 +26,10 @@
         "@nestjs/core": "6.5.3",
         "@nestjs/testing": "6.3.2",
         "@types/node": "^12.7.2",
-        "axios": "0.19.0",
+        "@types/request-promise": "^4.1.44",
         "nestjs-config": "1.4.3",
         "reflect-metadata": "0.1.13",
+        "request-promise": "^4.2.4",
         "rxjs": "6.5.2"
     },
     "devDependencies": {

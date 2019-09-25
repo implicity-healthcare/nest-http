@@ -1,18 +1,13 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosStatic } from 'axios';
+import { NHCInstance  } from './classes/NHCInstance';
+import { RequestPromiseOptions } from 'request-promise';
 
-export interface IHTTPClient extends AxiosStatic {
+export interface NHCRequestOptions extends RequestPromiseOptions {
+    errorHandler?: Function
 }
 
-export interface IHTTPClientInstance extends AxiosInstance {
+export interface NHCConfiguration {
+    target?: string,
+    request?: NHCRequestOptions
 }
 
-export interface IHTTPRequestConfiguration extends AxiosRequestConfig {
-
-}
-
-export interface IHTTPClientConfiguration {
-    target?: string;
-    request?: IHTTPRequestConfiguration;
-}
-
-export type IHTTPClientBuilder = (clientConfiguration?: IHTTPClientConfiguration) => IHTTPClientInstance;
+export type IHTTPClientBuilder = (options?: NHCConfiguration) => NHCInstance;

@@ -33,7 +33,7 @@ const errorsMap = {
     504: GatewayTimeoutException,
 };
 
-export function NestAxiosBridgeErrorHandler(error: AxiosError) {
+export function NestBridgeErrorHandler(error: AxiosError) {
     const exceptionClass = error.response ? errorsMap[error.response.status] : InternalServerErrorException;
     if (error.response) {
         return Promise.reject(new exceptionClass(error.response.data));
