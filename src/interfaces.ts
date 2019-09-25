@@ -1,8 +1,14 @@
 import { NHCInstance  } from './classes/NHCInstance';
 import { RequestPromiseOptions } from 'request-promise';
+import { RequestError } from 'request-promise/errors';
+import { Headers } from 'request';
+
+export interface NHCError extends RequestError {
+    statusCode: number,
+}
 
 export interface NHCRequestOptions extends RequestPromiseOptions {
-    errorHandler?: Function
+    errorHandler?: (error: NHCError) => void
 }
 
 export interface NHCConfiguration {
@@ -10,4 +16,8 @@ export interface NHCConfiguration {
     request?: NHCRequestOptions
 }
 
-export type IHTTPClientBuilder = (options?: NHCConfiguration) => NHCInstance;
+export interface NHCDefaultOptions {
+    headers?: Headers;
+}
+
+export type NHCClientBuilder = (options?: NHCConfiguration) => NHCInstance;

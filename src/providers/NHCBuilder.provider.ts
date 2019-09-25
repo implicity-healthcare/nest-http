@@ -1,18 +1,19 @@
 import { NestHTTPClientBuilderToken } from '../constants';
 import { ConfigService } from 'nestjs-config';
 import {
-    IHTTPClientBuilder, NHCConfiguration, NHCRequestOptions,
+    NHCClientBuilder,
+    NHCConfiguration, NHCRequestOptions,
 } from '../interfaces';
 import { NHCInstance } from '../classes/NHCInstance';
 import { NestBridgeErrorHandler } from '../utils/NestBridgeErrorHandler';
 
-export const NestHTTPClientBuilderProvider = {
+export const NHCBuilderProvider = {
     token: NestHTTPClientBuilderToken,
     provide: NestHTTPClientBuilderToken,
     inject: [
         ConfigService,
     ],
-    useFactory: (configService: ConfigService): IHTTPClientBuilder =>
+    useFactory: (configService: ConfigService): NHCClientBuilder =>
         (configuration: NHCConfiguration = {}): NHCInstance => {
             const httpConfiguration: NHCRequestOptions = configuration.target
                 ? configService.get(configuration.target)

@@ -14,8 +14,7 @@ import {
     UnauthorizedException,
     UnprocessableEntityException,
 } from '@nestjs/common';
-import { RequestError } from 'request-promise/errors';
-import * as Bluebird from 'bluebird';
+import { NHCError } from '../interfaces';
 
 const errorsMap = {
     400: BadRequestException,
@@ -33,11 +32,6 @@ const errorsMap = {
     503: ServiceUnavailableException,
     504: GatewayTimeoutException,
 };
-
-export interface NHCError extends RequestError {
-    statusCode: number,
-}
-
 export function NestBridgeErrorHandler(error: NHCError) {
     const exceptionClass = (error && error.statusCode)
         ? errorsMap[error.statusCode]
