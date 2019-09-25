@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import {
     BadGatewayException,
     BadRequestException,
@@ -15,6 +14,8 @@ import {
     UnauthorizedException,
     UnprocessableEntityException,
 } from '@nestjs/common';
+import { RequestError } from 'request-promise/errors';
+import * as Bluebird from 'bluebird';
 
 const errorsMap = {
     400: BadRequestException,
@@ -33,12 +34,21 @@ const errorsMap = {
     504: GatewayTimeoutException,
 };
 
-export function NestBridgeErrorHandler(error: AxiosError) {
-    const exceptionClass = error.response ? errorsMap[error.response.status] : InternalServerErrorException;
-    if (error.response) {
-        return Promise.reject(new exceptionClass(error.response.data));
-    }
+export interface NHCError extends RequestError {
+    statusCode: number,
+}
 
-    const message = `${ error.config && error.config.url } - ${ error.code }`;
-    return Promise.reject(new exceptionClass(message));
+export function NestBridgeErrorHandler(error: NHCError) {
+    const exceptionClass = (error && error.statusCode)
+        ? errorsMap[error.statusCode]
+        : ServiceUnavailableException;
+
+    if (error.response)
+        throw new exceptionClass(error.response['body']);
+
+    if (error && error.options )
+        throw new exceptionClass(`Unknown error ${error.options}`);
+
+
+    throw new exceptionClass();
 }

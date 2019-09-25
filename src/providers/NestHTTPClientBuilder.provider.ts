@@ -4,6 +4,7 @@ import {
     IHTTPClientBuilder, NHCConfiguration, NHCRequestOptions,
 } from '../interfaces';
 import { NHCInstance } from '../classes/NHCInstance';
+import { NestBridgeErrorHandler } from '../utils/NestBridgeErrorHandler';
 
 export const NestHTTPClientBuilderProvider = {
     token: NestHTTPClientBuilderToken,
@@ -18,9 +19,7 @@ export const NestHTTPClientBuilderProvider = {
                 : {};
 
             const options: NHCRequestOptions = { ...httpConfiguration, ...configuration.request };
-            options.transform = (body, response, resolveWithFullResponse) => {
-                console.log('> response:', response);
-            };
+            options.errorHandler = NestBridgeErrorHandler;
 
             return new NHCInstance(options);
         },
