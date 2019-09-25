@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import {
     BadGatewayException,
     BadRequestException,
@@ -15,6 +14,7 @@ import {
     UnauthorizedException,
     UnprocessableEntityException,
 } from '@nestjs/common';
+import { NHCError } from '../interfaces';
 
 const errorsMap = {
     400: BadRequestException,
@@ -32,13 +32,17 @@ const errorsMap = {
     503: ServiceUnavailableException,
     504: GatewayTimeoutException,
 };
+export function NestBridgeErrorHandler(error: NHCError) {
+    const exceptionClass = (error && error.statusCode)
+        ? errorsMap[error.statusCode]
+        : ServiceUnavailableException;
 
-export function NestAxiosBridgeErrorHandler(error: AxiosError) {
-    const exceptionClass = error.response ? errorsMap[error.response.status] : InternalServerErrorException;
-    if (error.response) {
-        return Promise.reject(new exceptionClass(error.response.data));
-    }
+    if (error.response)
+        throw new exceptionClass(error.response['body']);
 
-    const message = `${ error.config && error.config.url } - ${ error.code }`;
-    return Promise.reject(new exceptionClass(message));
+    if (error && error.options )
+        throw new exceptionClass(`Unknown error ${error.options}`);
+
+
+    throw new exceptionClass();
 }

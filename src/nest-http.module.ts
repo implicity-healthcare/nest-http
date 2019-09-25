@@ -1,16 +1,16 @@
-import { HTTPClientProvider } from './providers/HTTPClient.provider';
-import { HTTPClientBuilderProvider } from './providers/HTTPClientBuilder.provider';
+import { NHCClientProvider } from './providers/NHCClient.provider';
+import { NHCBuilderProvider } from './providers/NHCBuilder.provider';
 import { Global, Module } from '@nestjs/common';
 
 @Global()
 @Module({
     exports: [
-        HTTPClientProvider,
-        HTTPClientBuilderProvider
+        NHCClientProvider,
+        NHCBuilderProvider
     ],
     providers: [
-        HTTPClientProvider,
-        HTTPClientBuilderProvider
+        NHCClientProvider,
+        NHCBuilderProvider
     ]
 })
 export class NestHTTPModule {
