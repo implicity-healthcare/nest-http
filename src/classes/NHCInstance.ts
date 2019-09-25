@@ -19,7 +19,7 @@ export class NHCInstance {
     }
 
     public post(path: string, data: any, options: NHCRequestOptions = {}): Bluebird<any> {
-        const configuration = this.prepare(path, options);
+        const configuration = this.prepare(path, options, data);
 
         return requestPromise
             .post(path, configuration)
@@ -27,7 +27,7 @@ export class NHCInstance {
     }
 
     public put(path: string, data: any, options: NHCRequestOptions = {}): Bluebird<any> {
-        const configuration = this.prepare(path, options);
+        const configuration = this.prepare(path, options, data);
 
         return requestPromise
             .put(path, configuration)
@@ -43,7 +43,7 @@ export class NHCInstance {
     }
 
     public patch(path: string, data: any, options: NHCRequestOptions = {}): Bluebird<any> {
-        const configuration = this.prepare(path, options);
+        const configuration = this.prepare(path, options, data);
 
         return requestPromise
             .patch(path, configuration)
