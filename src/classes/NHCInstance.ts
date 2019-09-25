@@ -1,9 +1,10 @@
 import * as requestPromise from 'request-promise';
 import * as Bluebird from 'bluebird';
 import { NHCDefaultOptions, NHCRequestOptions } from '../interfaces';
+import { DefaultOptions } from './NHCDefaultOptions';
 
 export class NHCInstance {
-    public defaults: NHCDefaultOptions = {};
+    public defaults: NHCDefaultOptions = new DefaultOptions();
 
     constructor(
         private readonly options: NHCRequestOptions = {},
@@ -11,7 +12,7 @@ export class NHCInstance {
     }
 
     public get(path: string, options: NHCRequestOptions = {}): Bluebird<any> {
-        const configuration = this.prepare(path, options);
+        const configuration = this.prepare(options);
 
         return requestPromise
             .get(path, configuration)
@@ -19,7 +20,7 @@ export class NHCInstance {
     }
 
     public post(path: string, data: any, options: NHCRequestOptions = {}): Bluebird<any> {
-        const configuration = this.prepare(path, options, data);
+        const configuration = this.prepare(options, data);
 
         return requestPromise
             .post(path, configuration)
@@ -27,7 +28,7 @@ export class NHCInstance {
     }
 
     public put(path: string, data: any, options: NHCRequestOptions = {}): Bluebird<any> {
-        const configuration = this.prepare(path, options, data);
+        const configuration = this.prepare(options, data);
 
         return requestPromise
             .put(path, configuration)
@@ -35,7 +36,7 @@ export class NHCInstance {
     }
 
     public head(path: string, options: NHCRequestOptions = {}): Bluebird<any> {
-        const configuration = this.prepare(path, options);
+        const configuration = this.prepare(options);
 
         return requestPromise
             .head(path, configuration)
@@ -43,7 +44,7 @@ export class NHCInstance {
     }
 
     public patch(path: string, data: any, options: NHCRequestOptions = {}): Bluebird<any> {
-        const configuration = this.prepare(path, options, data);
+        const configuration = this.prepare(options, data);
 
         return requestPromise
             .patch(path, configuration)
@@ -51,7 +52,7 @@ export class NHCInstance {
     }
 
     public delete(path: string, options: NHCRequestOptions = {}): Bluebird<any> {
-        const configuration = this.prepare(path, options);
+        const configuration = this.prepare(options);
 
         return requestPromise
             .delete(path, configuration)
@@ -64,7 +65,7 @@ export class NHCInstance {
             : Bluebird.reject(error);
     }
 
-    private prepare(path: string, options: NHCRequestOptions = {}, data?: any): NHCRequestOptions {
+    private prepare(options: NHCRequestOptions = {}, data?: any): NHCRequestOptions {
         const configuration = { ...this.defaults, ...this.options, ...options };
         configuration.body = data;
 
