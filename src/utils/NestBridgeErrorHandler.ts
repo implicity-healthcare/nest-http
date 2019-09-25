@@ -40,9 +40,8 @@ export function NestBridgeErrorHandler(error: NHCError) {
     if (error.response)
         throw new exceptionClass(error.response['body']);
 
-    if (error && error.options )
-        throw new exceptionClass(`Unknown error ${error.options}`);
-
+    if (error && error.options)
+        throw new exceptionClass(`Unknown error ${error.options.baseUrl || error.options['uri']}`);
 
     throw new exceptionClass();
 }
