@@ -1,10 +1,7 @@
 import { NestHTTPClientBuilderToken } from '../constants';
 import { ConfigService } from 'nestjs-config';
-import {
-    NHCBuilder,
-    NHCConfiguration, NHCRequestOptions,
-} from '../interfaces';
-import { NHCInstance } from '../classes/NHCInstance';
+import { NHCBuilder, NHCConfiguration, NHCRequestOptions, } from '../interfaces';
+import { NHCInstance } from '..';
 import { NestBridgeErrorHandler } from '../utils/NestBridgeErrorHandler';
 
 export const NHCBuilderProvider = {

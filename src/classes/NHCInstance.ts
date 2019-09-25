@@ -30,7 +30,7 @@ export class NHCInstance {
         const configuration = this.prepare(path, options);
 
         return requestPromise
-            .post(path, configuration)
+            .put(path, configuration)
             .catch(this.handle.bind(this, configuration));
     }
 
@@ -46,7 +46,7 @@ export class NHCInstance {
         const configuration = this.prepare(path, options);
 
         return requestPromise
-            .head(path, configuration)
+            .patch(path, configuration)
             .catch(this.handle.bind(this, configuration));
     }
 

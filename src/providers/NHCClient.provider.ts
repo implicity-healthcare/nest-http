@@ -1,5 +1,5 @@
 import { NestHTTPClientToken } from '../constants';
-import { NHCInstance } from '../classes/NHCInstance';
+import { NHCInstance } from '..';
 
 export const NHCClientProvider = {
     token: NestHTTPClientToken,
