@@ -1,7 +1,7 @@
 import { NestHTTPClientBuilderToken } from '../constants';
 import { ConfigService } from 'nestjs-config';
 import {
-    NHCClientBuilder,
+    NHCBuilder,
     NHCConfiguration, NHCRequestOptions,
 } from '../interfaces';
 import { NHCInstance } from '../classes/NHCInstance';
@@ -13,7 +13,7 @@ export const NHCBuilderProvider = {
     inject: [
         ConfigService,
     ],
-    useFactory: (configService: ConfigService): NHCClientBuilder =>
+    useFactory: (configService: ConfigService): NHCBuilder =>
         (configuration: NHCConfiguration = {}): NHCInstance => {
             const httpConfiguration: NHCRequestOptions = configuration.target
                 ? configService.get(configuration.target)
