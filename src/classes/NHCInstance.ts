@@ -69,14 +69,6 @@ export class NHCInstance {
         const configuration = { ...this.options, ...this.defaults, ...options };
         configuration.body = data;
 
-        if (data && typeof data !== 'string' && !(Buffer.isBuffer(data))) {
-            try {
-                configuration.body = JSON.stringify(data)
-            } catch (e) {
-                configuration.body = undefined
-            }
-        }
-
         return configuration;
     }
 }
