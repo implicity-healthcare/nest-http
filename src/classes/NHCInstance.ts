@@ -66,7 +66,7 @@ export class NHCInstance {
     }
 
     private prepare(options: NHCRequestOptions = {}, data?: any): NHCRequestOptions {
-        const configuration = { ...this.defaults, ...this.options, ...options };
+        const configuration = { ...this.options, ...this.defaults, ...options };
         configuration.body = data;
 
         if (data && typeof data !== 'string' && !(Buffer.isBuffer(data))) {
