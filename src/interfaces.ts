@@ -2,6 +2,7 @@ import { NHCInstance } from './classes/NHCInstance';
 import { RequestPromiseOptions } from 'request-promise';
 import { RequestError } from 'request-promise/errors';
 import { Headers, UriOptions, UrlOptions } from 'request';
+import { Url } from "url";
 
 export interface NHCError extends RequestError {
     statusCode: number,
@@ -9,11 +10,13 @@ export interface NHCError extends RequestError {
 
 export interface NHCRequestOptions extends RequestPromiseOptions {
     errorHandler?: (error: NHCError) => void
+    url?: string | Url;
+    uri?: string | Url;
 }
 
 export interface NHCConfiguration {
     target?: string,
-    request?: NHCRequestOptions
+    request?: NHCRequestOptions,
 }
 
 export interface NHCDefaultOptions {
