@@ -1,7 +1,7 @@
 import { NHCInstance } from './classes/NHCInstance';
 import { RequestPromiseOptions } from 'request-promise';
 import { RequestError } from 'request-promise/errors';
-import { Headers } from 'request';
+import { Headers, UriOptions, UrlOptions } from 'request';
 
 export interface NHCError extends RequestError {
     statusCode: number,

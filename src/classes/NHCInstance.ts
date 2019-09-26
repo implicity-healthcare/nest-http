@@ -2,7 +2,8 @@ import * as requestPromise from 'request-promise';
 import * as Bluebird from 'bluebird';
 import { NHCDefaultOptions, NHCRequestOptions } from '../interfaces';
 import { DefaultOptions } from './NHCDefaultOptions';
-import * as _  from 'lodash'
+import * as _ from 'lodash'
+import { Request } from 'request';
 
 export class NHCInstance {
     public defaults: NHCDefaultOptions = new DefaultOptions();
@@ -61,6 +62,13 @@ export class NHCInstance {
             .catch(this.handle.bind(this, configuration));
     }
 
+    public raw(options: NHCRequestOptions = {}): Request {
+        const configuration = this.prepare(options);
+
+        return requestPromise(configuration as any)
+    }
+
+
     private handle(configuration, error) {
         return (configuration.errorHandler)
             ? configuration.errorHandler(error)
@@ -69,7 +77,9 @@ export class NHCInstance {
 
     private prepare(options: NHCRequestOptions = {}, data?: any): NHCRequestOptions {
         const configuration = _.merge(this.options, this.defaults, options);
-        configuration.body = data;
+
+        if (data)
+            configuration.body = data;
 
         return configuration;
     }

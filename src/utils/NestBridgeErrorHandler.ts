@@ -35,13 +35,13 @@ const errorsMap = {
 export function NestBridgeErrorHandler(error: NHCError) {
     const exceptionClass = (error && error.statusCode)
         ? errorsMap[error.statusCode]
-        : ServiceUnavailableException;
+        : InternalServerErrorException;
 
     if (error.response)
         throw new exceptionClass(error.response['body']);
 
     if (error && error.options)
-        throw new exceptionClass(`Unknown error ${error.options.baseUrl || error.options['uri']}`);
+        throw new Error(`Unknown error ${error.options.baseUrl || error.options['uri']}`);
 
-    throw new exceptionClass();
+    throw new Error();
 }
