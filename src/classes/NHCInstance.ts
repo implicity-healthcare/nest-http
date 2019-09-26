@@ -75,7 +75,7 @@ export class NHCInstance {
     }
 
     private prepare(options: NHCRequestOptions = {}, data?: any): NHCRequestOptions {
-        const configuration = _.merge(this.options, this.defaults, options);
+        const configuration = _.merge({}, this.options, this.defaults, options);
 
         if (data)
             configuration.body = data;
