@@ -68,7 +68,6 @@ export class NHCInstance {
         return requestPromise(configuration as any)
     }
 
-
     private handle(configuration, error) {
         return (configuration.errorHandler)
             ? configuration.errorHandler(error)
