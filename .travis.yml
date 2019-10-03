@@ -15,7 +15,7 @@ before_script:
 script:
   - npm run coverage
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build lcov --exit-code $TRAVIS_TEST_RESULT
 deploy:
   skip_cleanup: true
   provider: npm
