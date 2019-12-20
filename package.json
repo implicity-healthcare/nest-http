@@ -1,8 +1,12 @@
 {
     "name": "@implicity/nest-http",
+    "repository": {
+        "url": "https://github.com/implicity-healthcare/nest-http.git",
+        "type": "git"
+    },
     "version": "1.0.14",
     "description": "description",
-    "author": "",
+    "author": "Julien Sarazin <julien.sarazin@implicity.fr>",
     "license": "MIT",
     "publishConfig": {
         "access": "public"
@@ -12,7 +16,6 @@
     "scripts": {
         "test": "jest",
         "coverage": "jest --coverage",
-        "coveralls": "yarn run coverage --coverageReporters=text-lcov | coveralls",
         "test:watch": "jest --watch",
         "build": "rm -rf ./lib && tsc",
         "prepublish": "npm run build"
