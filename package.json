@@ -15,7 +15,7 @@
     "types": "lib/index.d.ts",
     "scripts": {
         "test": "jest",
-        "coverage": "jest --coverage",
+        "coverage": "jest --coverage --passWithNoTests",
         "test:watch": "jest --watch",
         "build": "rm -rf ./lib && tsc",
         "prepublish": "npm run build"
