@@ -8,15 +8,11 @@ export interface NHCError extends RequestError {
     statusCode: number,
 }
 
-export interface NHCRequestOptions extends RequestPromiseOptions {
+export interface NHCConfiguration extends RequestPromiseOptions {
+    target?: string,
     errorHandler?: (error: NHCError) => void
     url?: string | Url;
     uri?: string | Url;
-}
-
-export interface NHCConfiguration {
-    target?: string,
-    request?: NHCRequestOptions,
 }
 
 export interface NHCDefaultOptions {

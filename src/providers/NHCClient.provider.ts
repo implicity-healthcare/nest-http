@@ -6,3 +6,4 @@ export const NHCClientProvider = {
     provide: NestHTTPClientToken,
     useFactory: () => new NHCInstance(),
 };
+

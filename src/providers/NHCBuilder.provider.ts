@@ -1,5 +1,5 @@
-import { NestHTTPClientBuilderToken } from '../constants';
-import { NHCBuilder, NHCConfiguration, NHCRequestOptions, } from '../interfaces';
+import { NestHTTPClientBuilderToken, NestHTTPClientConfigurationNamespace } from '../constants';
+import { NHCBuilder, NHCConfiguration, } from '../interfaces';
 import { NHCInstance } from '..';
 import { NestBridgeErrorHandler } from '../utils/NestBridgeErrorHandler';
 import { ConfigService } from '@nestjs/config';
@@ -11,11 +11,11 @@ export const NHCBuilderProvider = {
         ConfigService,
     ],
     useFactory: (configService: ConfigService): NHCBuilder =>
-        (configuration: NHCConfiguration = {}): NHCInstance => {
-            const httpConfiguration = configService.get<NHCRequestOptions>(`NHC.${configuration.target}`, {});
-            const options: NHCRequestOptions = { ...httpConfiguration, ...configuration.request };
-            options.errorHandler = NestBridgeErrorHandler;
+        (localConfiguration: NHCConfiguration = {}): NHCInstance => {
+            const globalConfiguration = configService.get<NHCConfiguration>(`${NestHTTPClientConfigurationNamespace}.${localConfiguration.target}`, {});
+            const configuration: NHCConfiguration = { ...globalConfiguration, ...localConfiguration };
+            configuration.errorHandler = NestBridgeErrorHandler;
 
-            return new NHCInstance(options);
+            return new NHCInstance(configuration);
         },
 };
